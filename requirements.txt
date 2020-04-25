@@ -3,3 +3,4 @@ requests==2.22.0
 python-dotenv==0.12.0
 PyPDF2==1.26.0
 pandas==0.25.1
+slate3k==0.5.3
