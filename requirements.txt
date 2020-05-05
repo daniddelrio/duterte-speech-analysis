@@ -6,3 +6,9 @@ pandas==0.25.1
 slate3k==0.5.3
 tika==1.24
 pdfplumber==0.5.20
+nltk==3.5
+scikit-learn==0.22.2.post1
+seaborn==0.10.1
+pyLDAvis==2.1.2
+matplotlib==3.2.1
+wordcloud==1.7.0
