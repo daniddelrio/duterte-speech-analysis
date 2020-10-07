@@ -67,7 +67,11 @@ def extract_page(row, df):
         )
 
         # To get the page of the PDF of the transcript
-        temp_url = soup_speech.find("a", string="Full Transcript").get("href")
+        temp_url = soup_speech.find("a", string="Full Transcript")
+        if temp_url is None:
+            return None
+        temp_url = temp_url.get("href")
+
         if is_absolute(temp_url):
             url = temp_url
         else:

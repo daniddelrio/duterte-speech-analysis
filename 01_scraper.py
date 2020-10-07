@@ -43,26 +43,27 @@ except:
 url_func = lambda num: "https://pcoo.gov.ph/presidential-speech/page/{}/".format(num)
 url = url_func(page_num)
 
-try:
-    page = requests.get(url, headers=req_headers)
-    soup = BeautifulSoup(page.content.decode("utf-8", "ignore"), "html.parser")
-
-    while "error404" not in soup.body["class"]:
-        print("Scraping: " + url)
-
-        # Use parallel processing to process all the speeches per page
-        df = parallel_process(df, page_num, soup.find_all(class_="focus-feature row"))
-
-        page_num += 1
-        url = url_func(page_num)
-
-        # Get next page of speeches
-        time.sleep(SLEEP_TIME)
+if __name__ == '__main__':
+    try:
         page = requests.get(url, headers=req_headers)
         soup = BeautifulSoup(page.content.decode("utf-8", "ignore"), "html.parser")
 
-except Exception as ex:
-    traceback.print_exc()
-    print("Error in opening URL {}".format(url))
+        while "error404" not in soup.body["class"]:
+            print("Scraping: " + url)
+
+            # Use parallel processing to process all the speeches per page
+            df = parallel_process(df, page_num, soup.find_all(class_="focus-feature row"))
+
+            page_num += 1
+            url = url_func(page_num)
+
+            # Get next page of speeches
+            time.sleep(SLEEP_TIME)
+            page = requests.get(url, headers=req_headers)
+            soup = BeautifulSoup(page.content.decode("utf-8", "ignore"), "html.parser")
+
+    except Exception as ex:
+        traceback.print_exc()
+        print("Error in opening URL {}".format(url))
 
 # Source: https://www.scrapehero.com/how-to-prevent-getting-blacklisted-while-scraping/
