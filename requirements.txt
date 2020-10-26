@@ -13,3 +13,4 @@ seaborn==0.10.1
 pyLDAvis==2.1.2
 matplotlib==3.2.1
 wordcloud==1.7.0
+ipykernel
